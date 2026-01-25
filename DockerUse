@@ -1,4 +1,4 @@
-🔬 Experiment 4: Pulling and Running Docker Images
+🔬 Experiment 4: Pulling and Running Docker Images (note the r32.6.1 corresponding to your jetpack 4.6) 
 Step 1: Pull a Docker image
 sudo docker pull nvcr.io/nvidia/l4t-pytorch:r32.6.1-pth1.8-py3
 ________________________________________
