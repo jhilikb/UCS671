@@ -1,0 +1,25 @@
+🔬 Experiment 4: Pulling and Running Docker Images
+Step 1: Pull a Docker image
+sudo docker pull nvcr.io/nvidia/l4t-pytorch:r32.6.1-pth1.8-py3
+________________________________________
+Step 2: Run a Docker container
+sudo docker run -it --rm \
+  --network host \
+  --volume /home/nvidia/pose:/home/pose \
+  --device /dev/video0 \
+  --runtime nvidia \
+  <image_id or repo:tag>
+
+You can get image_id when you do docker images.
+
+Step 3: Use exit command to quit a docker.
+
+Inside a docker you can create data, edit code, install softwares like it was a normal machine
+You will loose it on exit.
+If you want to retain it, dont use the --rm option while running the docker. After you make changes in the docker, exit. 
+
+Step 4: You can check the container (instance of docker image) you ran using
+sudo docker ps -a
+
+Step 5: You can commit the changes using the container_id (you can see it with the docker ps -a command) , and a new name
+sudo docker commit container_id mydoc:v1
