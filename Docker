@@ -19,22 +19,30 @@ If sudo docker images returns a list or an empty table without errors
 ________________________________________
 
 🔬 Experiment 3: Mounting SD Card for Docker (Only if Case A occurs)
-Step 1: Mount the SD card
+Step 1: Mount the SD card (you assume you have a folder /sdcard on jetson)
 sudo mount /dev/mmcblk1p1 /sdcard
 Verify:
 df -h
 ________________________________________
-Step 2: Verify Docker folder on SD card
+Step 2: Verify Docker folder on SD card (this means that your card obviously was already setup)
 cd /sdcard/fol
 ls
 You should see a docker directory.
 ________________________________________
-Step 3: Verify symbolic link
+Step 3: Verify symbolic link (you linked the docker on the sdcard to where it is supposed to be, i.e in /var/lib)
 cd /var/lib
 ls -l
 Expected output:
 docker -> /sdcard/fol/docker
 ________________________________________
-Step 4: Restart Docker service
+Step 4: Restart Docker service 
 sudo systemctl restart docker
+
+⚠️ These commands must be executed every time you log in incase you have verified Case A above:
+sudo mount /dev/mmcblk1p1 /sdcard
+sudo systemctl restart docker
+
+If you have Case B and you want to setup your sdcard at any point of time (to allow more space to the docker folder),
+you need to follow steps 1-4 from https://github.com/jhilikb/jetson_ninstall/tree/main
+
 
