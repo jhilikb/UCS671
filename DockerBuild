@@ -1,0 +1,23 @@
+🔬 Experiment 5: Building a Docker Image Using Dockerfile
+
+Step 1: Create a working directory on your jetson
+mkdir mydocker
+cd mydocker
+________________________________________
+Step 2: Create Dockerfile
+vi Dockerfile
+•	Press i to enter insert mode
+•	Add required instructions
+
+FROM	Base image
+ARG	Build-time variables
+RUN	Execute commands
+WORKDIR	Set working directory
+ENV	Environment variables
+COPY	Copy files from jetson into the docker image you are building
+SOURCE	run a .sh file
+
+•	Press Esc, then :wq to save
+________________________________________
+Step 3: Build Docker image
+sudo docker build -t mynewdocker:v1 .
