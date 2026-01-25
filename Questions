@@ -1,1 +1,41 @@
+Modifying Docker Images
+Method 1: Modify a Running Container
+1.	Run container without --rm
+2.	Make required changes
+3.	Exit container
+4.	List containers:
+sudo docker ps -a
+5.	Commit changes:
+sudo docker commit <container_id> newrepo:newtag
+________________________________________
+Method 2: Modify Using Dockerfile (Recommended)
+1.	Use existing image in FROM
+2.	Add software/data using RUN, COPY, pip install, wget
+3.	Build a new image 
+sudo docker build -t newim:v3 .
+✔️ Reproducible and maintainable
+________________________________________
+________________________________________
+
+🔬 Adding Data to Docker
+Method 1: Volume Mounting (Temporary)
+sudo docker run -it --rm \
+  --network host \
+  --runtime nvidia \
+  --volume /home/nvidia/data:/home
+✔️ Data persists on Jetson
+❌ Changes outside mounted directory are lost
+________________________________________
+Method 2: Add Data at Build Time (Permanent)
+•	Use COPY
+•	Use git clone
+•	Use wget
+________________________________________
+Method 3: Modify and Commit
+1.	Run container without --rm
+2.	Add data inside container
+3.	Exit container
+4.	Commit container
+________________________________________
+
 
