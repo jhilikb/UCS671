@@ -39,3 +39,5 @@ Method 3: Modify and Commit
 ________________________________________
 
 
+Note that using commit and using build are 2 different processes. You use commit if you want to run a container and make changes. 
+You use build if you want to make changes without running containers.
