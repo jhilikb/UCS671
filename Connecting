@@ -1,0 +1,37 @@
+	Connect to a Jetson Nano using SSH
+
+🧰 Prerequisites
+•	Host PC running Ubuntu
+•	NVIDIA Jetson Nano (powered on)
+•	USB connection or configured network
+•	Username: nvidia
+•	Password: nvidia
+•	Basic Linux terminal familiarity
+________________________________________
+
+
+🔬 Experiment 1: Connecting to Jetson Nano
+Step 1: Open a terminal on your Ubuntu host and type
+ssh nvidia@192.168.55.1
+
+✔️ Successful login indicates proper connectivity.
+
+Problems:-
+ keygen issues:   Delete the key and login again. This is caused if you connect different jetsons on your host.
+
+
+Questions:
+1. What if I connect with ssh 192.168.55.1?
+It will use the username of my host machine (say csed) and try to log me in at csed@192.168.55.1
+If the account doesnt exist on jetson,i will get an error
+
+2. How do I transfer data between jetson and my host laptop?
+Use the following on the laptop terminal to copy from jetson to laptop
+scp nvidia@192.168.55.1:/home/nvidia/data ./
+
+Use the following on the laptop terminal to copy from laptop to jetson
+scp ./data nvidia@192.168.55.1:/home/nvidia/
+
+
+
+
