@@ -1,0 +1,40 @@
+🔬 Experiment 2: Verifying Docker Installation
+
+What is a Docker?
+Think of it like an environment where all software, code and data can exist. 
+For clarity think of the following analogy: - Oracle Virtual Box ( docker ), You can have Ubuntu24, Fedora, Redhat running separately.
+These are like docker images. Each is like a separate machine with their isolated environment, data etc.
+When you run any of these, the running instance is a container.
+
+Step 1: Check Docker images
+sudo docker images
+
+Case A: Docker daemon error
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock.
+Is the docker daemon running?
+This indicates Docker data is located on an SD card that is not mounted.
+
+Case B: Docker works normally
+If sudo docker images returns a list or an empty table without errors
+________________________________________
+
+🔬 Experiment 3: Mounting SD Card for Docker (Only if Case A occurs)
+Step 1: Mount the SD card
+sudo mount /dev/mmcblk1p1 /sdcard
+Verify:
+df -h
+________________________________________
+Step 2: Verify Docker folder on SD card
+cd /sdcard/fol
+ls
+You should see a docker directory.
+________________________________________
+Step 3: Verify symbolic link
+cd /var/lib
+ls -l
+Expected output:
+docker -> /sdcard/fol/docker
+________________________________________
+Step 4: Restart Docker service
+sudo systemctl restart docker
+
