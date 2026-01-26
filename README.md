@@ -11,10 +11,10 @@
    Checkout the questions to see if your concepts are clear
    
 5. **Once you are ready attempt the Quiz**  
-   You need to install streamlit on your laptop if you havent done so yet
+   You need to install streamlit on your laptop if you havent done so yet  
    _pip3 install streamlit_  
    Next go to the game_1 folder  
    _cd game_1_  
    now run the game and start, (it will launch on your browser)  
-  _ pip3 install streamlit_  
+   _pip3 install streamlit_ 
    
