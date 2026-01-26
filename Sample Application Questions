@@ -1,0 +1,28 @@
+1. Your friend is filming a short movie and wants automatic camera effects.
+If the main character enters the scene, the video should zoom in; if the character leaves, it should zoom out.
+Formulate the CV problem and describe the models and steps required
+
+2. Your just watched a movie where the main character is having a vision problem where he sees everything in "grayscale". He only sees a particular character in color
+Or any object which the character touches is in color. Can you formulate the CV tools to use for the effect?
+
+3. Your younger sibling wants an app that changes the background of a video call in real time according to specific actions by the user.
+Formulate the problem and explain how semantic segmentation models can be used to replace or blur the background on an edge device.
+
+4. A wildlife researcher wants to monitor animals visiting a water source using a low-power camera system.
+Design a deep learning–based solution to detect and classify animals while minimizing energy consumption. Explain your choice of models and edge deployment strategy.
+
+5. A character in a movie can “highlight” objects he is thinking about — those objects glow while the rest of the scene stays normal.
+Design a vision system where an object of interest becomes highlighted when the character points at it. Explain the models and inference steps. Further 
+add effects where the center of the frame is clear while the edges become distorted.
+
+6. In a thriller movie, the camera shows only silhouettes other than the main character, while the actual people are invisible.
+Formulate a vision pipeline that removes people from the scene but keeps their silhouettes.
+
+7. In a movie montage, whenever the scene has two characters the scene slowly zooms in and the background darkens.
+Formulate the problem and describe the CV tools required to detect this interaction and trigger effects.
+
+8. In a surreal movie scene, reflections in mirrors show a delayed version of the character’s movements.
+Formulate a vision-based solution that detects mirrors and applies a time-shifted reflection effect.
+
+9. Can you develop a game where clues appear as glowing symbols only when the camera points at the correct location.
+Formulate a computer vision approach to detect specific regions or objects and overlay virtual symbols in real time using a sequence of frames.
