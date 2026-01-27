@@ -1,1 +1,9 @@
+Once we start with Object Detection, Classification , Segmentation , Pose based tasks we have the following options:-
 
+1. Decide which framework to use (Tensorflow/Pytorch), go to the nvidia l4t catalog page, pull (sudo docker pull) an empty pytorch/tensorflow docker, 
+start the docker (sudo docker run ...),  write the application code ourselves , exit and commit the docker.
+
+2. Use an existing docker already prepared for the above task
+ex. https://github.com/dusty-nv/jetson-inference
+
+3. Use advanced docker features like deepstream, triton , or ROS nodes.
