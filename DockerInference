@@ -7,3 +7,15 @@ start the docker (sudo docker run ...),  write the application code ourselves , 
 ex. https://github.com/dusty-nv/jetson-inference
 
 3. Use advanced docker features like deepstream, triton , or ROS nodes.
+
+
+We will currently use approach (2)
+
+Step 1:  Go to https://github.com/dusty-nv/jetson-inference/blob/master/docs/aux-docker.md 
+Step 2: ssh into your jetson and on your jetson terminal type the following:-
+git clone --recursive --depth=1 https://github.com/dusty-nv/jetson-inference
+cd jetson-inference
+docker/run.sh
+
+(Extra notes: Remember for your 4gb i.e. the black kit you have very limited space on your device, i.e 16gb, its better to have all your data inside your sdcard. 
+So create a directory on your sdcard, say jetson-inference and link it to a location in desktop, then follow step 2 there)
