@@ -1,1 +1,27 @@
+In your last session (Docker Inference) you had done the following:
+Step 1:  Go to https://github.com/dusty-nv/jetson-inference/blob/master/docs/aux-docker.md 
+Step 2: ssh into your jetson and on your jetson terminal type the following:-
+git clone --recursive --depth=1 https://github.com/dusty-nv/jetson-inference
+cd jetson-inference
+docker/run.sh
+
+a. Now that you already have a folder jetson-inference already on your jetson device , move inside it
+cd jetson-inference/
+
+b. Now run the docker using 
+./docker/run.sh
+
+When you did this in your last class, your docker was pulled. You can confirm that by typing "sudo docker images" and seeing an entry with "dusty"there.
+When you run the same command in (b) today you will land inside the docker.
+
+c. In your docker run the following 
+cd build/aarch64/bin
+
+d. You can run 
+./imagenet.py images/orange_0.jpg images/test/output_0.jpg  # (default network is googlenet)
+
+imagenet.py is a sample file prepared for a classification task. You can provide arguments "images/orange_0.jpg"   and "images/test/output_0.jpg" to it.
+The first argument tells you what input image to perform classification on, the second tells you where to store output.
+
+
 
