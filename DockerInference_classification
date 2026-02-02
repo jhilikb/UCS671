@@ -31,6 +31,10 @@ Note that your docker mounts the following folders from your jetson
 --volume /home/csed/jetson-inference/python/training/classification/models:/jetson-inference/python/training/classification/models 
 --volume /home/csed/jetson-inference/python/training/detection/ssd/data:/jetson-inference/python/training/detection/ssd/data 
 --volume /home/csed/jetson-inference/python/training/detection/ssd/models:/jetson-inference/python/training/detection/ssd/models
+This means that if i save anything inside the docker in the "jetson-inference/data" folder, it will be available in the "/home/csed/jetson-inference/data" 
+folder on the device
+You can now see the files outside the docker, scp them on your laptop to open them.
+Note that /home/csed is the directory structure of this jetson. You may have /home/nvidia 
 
 
 ii. Can i take the input directly from the camera/video
