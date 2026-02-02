@@ -18,6 +18,6 @@
    now run the game and start, (it will launch on your browser)  
    _streamlit run app.py_
 
-6. **Start with the Docker_Inference and DockerInferenceClassification**  
+6. **Start with the _DockerInference_ and _DockerInference_Classification_**  
    You will run your first classification task on jetson device
    
