@@ -23,5 +23,25 @@ d. You can run
 imagenet.py is a sample file prepared for a classification task. You can provide arguments "images/orange_0.jpg"   and "images/test/output_0.jpg" to it.
 The first argument tells you what input image to perform classification on, the second tells you where to store output.
 
+Questions:-
+i. How do i copy the saved image back to some other location
+Note that your docker mounts the following folders from your jetson
+--volume /home/csed/jetson-inference/data:/jetson-inference/data 
+--volume /home/csed/jetson-inference/python/training/classification/data:/jetson-inference/python/training/classification/data 
+--volume /home/csed/jetson-inference/python/training/classification/models:/jetson-inference/python/training/classification/models 
+--volume /home/csed/jetson-inference/python/training/detection/ssd/data:/jetson-inference/python/training/detection/ssd/data 
+--volume /home/csed/jetson-inference/python/training/detection/ssd/models:/jetson-inference/python/training/detection/ssd/models
+
+
+ii. Can i take the input directly from the camera/video
+./imagenet.py  jellyfish.mkv images/test/jellyfish_resnet18.mkv
+./imagenet.py /dev/video0 output.mp4
+
+iii. What if i want to change the classification model
+./imagenet.py --network=resnet-18 images/jellyfish.jpg images/test/output_jellyfish.jpg
+
+iv. What if i want to make other custom changes in the file.
+you can create custom changes in a copy of the imagenet.py file and run that
+
 
 
