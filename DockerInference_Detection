@@ -1,1 +1,47 @@
+In your last session (Docker Inference) you had done the following:
+Step 1:  Go to https://github.com/dusty-nv/jetson-inference/blob/master/docs/aux-docker.md 
+Step 2: ssh into your jetson and on your jetson terminal type the following:-
+git clone --recursive --depth=1 https://github.com/dusty-nv/jetson-inference
+cd jetson-inference
+docker/run.sh
 
+a. Now that you already have a folder jetson-inference already on your jetson device , move inside it
+cd jetson-inference/
+
+b. Now run the docker using 
+./docker/run.sh
+
+When you did this in your last class, your docker was pulled. You can confirm that by typing "sudo docker images" and seeing an entry with "dusty"there.
+When you run the same command in (b) today you will land inside the docker.
+
+c. In your docker run the following 
+cd build/aarch64/bin
+
+d. You can run the following for detection
+./detectnet.py --network=ssd-mobilenet-v2 images/peds_0.jpg images/test/output.jpg  # --network flag is optional,ssd-mobilenet-v2 is default
+
+detectnet.py is a sample file prepared for a object detection task. You can provide arguments "images/peds_0.jpg"   and "images/test/output.jpg" to it.
+The first argument tells you what input image to perform detection on, the second tells you where to store output.
+
+Questions:-
+i. How do i copy the saved image back to some other location
+Note that your docker mounts the following folders from your jetson
+--volume /home/csed/jetson-inference/data:/jetson-inference/data 
+--volume /home/csed/jetson-inference/python/training/classification/data:/jetson-inference/python/training/classification/data 
+--volume /home/csed/jetson-inference/python/training/classification/models:/jetson-inference/python/training/classification/models 
+--volume /home/csed/jetson-inference/python/training/detection/ssd/data:/jetson-inference/python/training/detection/ssd/data 
+--volume /home/csed/jetson-inference/python/training/detection/ssd/models:/jetson-inference/python/training/detection/ssd/models
+This means that if i save anything inside the docker in the "jetson-inference/data" folder, it will be available in the "/home/csed/jetson-inference/data" 
+folder on the device
+You can now see the files outside the docker, scp them on your laptop to open them.
+Note that /home/csed is the directory structure of this jetson. You may have /home/nvidia 
+
+
+ii. Can i take the input directly from the camera/video
+./detectnet.py pedestrians.mp4 images/test/pedestrians_ssd.mp4
+
+iii. What if i want to change the model, put the model you want in the network argument
+./detectnet.py --network=xxx images/peds_0.jpg images/test/output.jpg 
+
+iv. What if i want to process a lot of images in one go.
+./detectnet.py "images/peds_*.jpg" images/test/peds_output_%i.jpg
