@@ -57,4 +57,5 @@ and then build it(sudo docker build .....). But remember it doesnt make sense to
 Notes: If your detectnet is giving you lib errors, check in your /usr/local folder on your jetson (after exiting docker). See if cuda is there. 
 If not install it using 
 sudo apt-get install cuda-toolkit-10-2
-You also need to install cudnn (you can check that 
+You also need to install cudnn 
+sudo apt-get install libcudnn8 libcudnn8-dev -y
