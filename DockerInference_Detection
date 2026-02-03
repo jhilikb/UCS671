@@ -45,3 +45,10 @@ iii. What if i want to change the model, put the model you want in the network a
 
 iv. What if i want to process a lot of images in one go.
 ./detectnet.py "images/peds_*.jpg" images/test/peds_output_%i.jpg
+
+v. I observe that when i run the docker i land in "root@csed-desktop:/jetson-inference#" i.e. /jetson-inference folder, why?
+The person who build the docker (not you, you are just pulling a readymade docker) had set WORKDIR in the last line of his Dockerfile. 
+This will force the docker to land in that path while running. 
+Can I change it?
+Yes you have to rebuild the docker, write your own Dockerfile, use FROM to bring the already existing one, make other changes, set WORKDIR at the end
+and then build it(sudo docker build .....). But remember it doesnt make sense to do this just for changing a landing directory. 
