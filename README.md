@@ -23,4 +23,7 @@
 
 7. **Continue with _DockerInference_Detection_ and _DockerInference_Segmentation_**
    You will run detection and segmentation tasks using images and camera input on your jetson
+
+8. **Go through _Applications_ to see that you know your way around**
+   Checkout the Application document to confirm that you have a grip on things
    
