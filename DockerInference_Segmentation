@@ -1,5 +1,13 @@
 Similar to detection and classification, you can also run segmentation models to perform image segmentation tasks.
+Same as before 
+a. Move inside jetson-inference on your jetson device
+cd jetson-inference/
 
+b. Now run the docker using 
+./docker/run.sh
+
+c. In your docker run the following 
+cd build/aarch64/bin
 
 
 You can refer https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-console-2.md#segmenting-images-from-the-command-line  and get started.
