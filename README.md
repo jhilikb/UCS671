@@ -20,4 +20,7 @@
 
 6. **Start with the _DockerInference_ and _DockerInference_Classification_**  
    You will run your first classification task on jetson device
+
+7. **Continue with _DockerInference_Detection_ and _DockerInference_Segmentation_**
+   You will run detection and segmentation tasks using images and camera input on your jetson
    
