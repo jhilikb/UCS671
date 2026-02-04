@@ -1,0 +1,8 @@
+Similar to detection and classification, you can also run segmentation models to perform image segmentation tasks.
+
+
+
+You can refer https://github.com/dusty-nv/jetson-inference/blob/master/docs/segnet-console-2.md#segmenting-images-from-the-command-line  and get started.
+For example you run the following to perform segmentation on an image "images/city_0.jpg" and save the output in "images/test/output.jpg" using model
+fcn-resnet18-cityscapes
+./segnet.py --network=fcn-resnet18-cityscapes images/city_0.jpg images/test/output.jpg
