@@ -1,0 +1,9 @@
+Now that you know how to build, modify,run dockers and you have run your first detection, classification and segmentation tasks, you should be able
+to do the following:-
+
+1. Create an application which will tell you the number of students sitting in the class
+2. Create an application which will tell you the number of students working on the laptop
+3. Create an application where you have a camera at the entry of a resturant and you sound an alert if someone has come with a pet
+4. Create an application which takes a list of images as input and groups them into categories "pets", "music instruments" , "bags"
+5. Create an application where you checkout the chairs in a room and save the unique ones. To clarify, say there are 5 chairs, 2 of the same kind and 3 others 
+different in design from each other. You save the images of 4 chairs.
