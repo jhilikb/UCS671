@@ -53,6 +53,10 @@ Can I change it?
 Yes you have to rebuild the docker, write your own Dockerfile, use FROM to bring the already existing one, make other changes, set WORKDIR at the end
 and then build it(sudo docker build .....). But remember it doesnt make sense to do this just for changing a landing directory. 
 
+vi. I dont have any models in my network folder. You can rerun the following in your container.
+cd /jetson-inference
+./tools/download-models.sh
+
 
 Notes: If your detectnet is giving you lib errors, check in your /usr/local folder on your jetson (after exiting docker). See if cuda is there. 
 If not install it using 
