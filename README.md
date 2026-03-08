@@ -1,3 +1,5 @@
+Look at the document "Syllabus" to check the MST topics, evaluation scheme and other details  
+
 1. **Start with _Connecting_**  
    Here you will learn how to connect your jetson to your laptop in a headless mode (i.e. without monitor)
    
