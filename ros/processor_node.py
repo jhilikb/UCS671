@@ -16,8 +16,8 @@ def image_callback(msg):
     processed = run_inference(cv_image)
     ros_image = bridge.cv2_to_imgmsg(processed, encoding="mono8")
     pub.publish(ros_image)
-    cv2.imshow("Processed Image", processed)
-    cv2.waitKey(1)
+    #cv2.imshow("Processed Image", processed)
+    #cv2.waitKey(1)
 
 def processor_node():
     global pub
