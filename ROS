@@ -7,10 +7,66 @@ While you do this check out the following NVIDIA course "A Beginner's Guide to A
 
 Once you are ready with the installation, we will understand the following:-
 1. Difference between ROS1 and ROS2 (https://roboticsbackend.com/ros1-vs-ros2-practical-overview/)
-2. The general concept of creating packages,nodes, subscribers, publishers, topics,messages and running them.
-DO NOT USE THIS LINK FOR ANY INSTALLATION
-(https://park-sangbeom.github.io/posts/how-to-set-up-ROS-on-Jetson/)
+2. The general concept of creating packages,nodes, subscribers, publishers, topics,messages and running them. 
+Look at the following example which demonstrates these.
 
-We will use the following link for running
+#!/usr/bin/env python3
+   
+import rospy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+import cv2
+import numpy as np
+import time
+   
+class JetsonVision:
+    def __init__(self):
+        self.bridge = CvBridge()
+        self.image_sub = rospy.Subscriber('/camera/image_raw', Image, self.image_callback)
+        self.image_pub = rospy.Publisher('/jetson_vision/processed', Image, queue_size=1)
+        self.gpu_mat = cv2.cuda_GpuMat()
+           
+    def image_callback(self, data):
+        try:
+            # Convert image to OpenCV format
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+               
+            # Start processing time measurement
+            start_time = time.time()
+               
+            # Upload image to GPU
+            self.gpu_mat.upload(cv_image)
+               
+            # Convert to grayscale on GPU
+            gpu_gray = cv2.cuda.cvtColor(self.gpu_mat, cv2.COLOR_BGR2GRAY)
+               
+            # Apply Gaussian blur
+            gpu_blur = cv2.cuda.GaussianBlur(gpu_gray, (7, 7), 0)
+               
+            # Detect edges using Canny
+            gpu_edges = cv2.cuda.Canny(gpu_blur, 50, 150)
+               
+            # Download results to CPU memory
+            edges = gpu_edges.download()
+               
+            # Calculate processing time
+            process_time = time.time() - start_time
+               
+            # Add processing time to result image
+            cv2.putText(edges, f"Process time: {process_time:.3f}s", (10, 30),
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                          
+            # Publish processed image
+            self.image_pub.publish(self.bridge.cv2_to_imgmsg(edges, "mono8"))
+               
+        except Exception as e:
+            rospy.logerr(e)
+   
+if __name__ == '__main__':
+    rospy.init_node('jetson_vision', anonymous=True)
+    jv = JetsonVision()
+    rospy.spin()
+
+3. We will use the following link for running our application
 https://github.com/dusty-nv/ros_deep_learning
 
