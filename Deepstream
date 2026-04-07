@@ -9,3 +9,5 @@ d) I repeat dont try to mount sdcard or restart docker here
 e) Once you are in the jetson device check whether you have the deepstream docker 
 (You are looking for nvcr.io/nvidia/deepstream-l4t:6.0-triton)
 You need to pull it if not present
+
+f) Run your docker with the docker run command
