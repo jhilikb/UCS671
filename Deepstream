@@ -17,3 +17,6 @@ In your docker check the folder
 It should have labels.txt, a subdirectory 1, and model file inside the subfolder 1. If it isnt there, download
 the model (ssd_mobilenet_v1_coco) from below, create subfolder 1 and put it there
 https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md
+
+You can go through the video https://drive.google.com/file/d/1aP9lQeRCHeciRG38RPGDsYQrBF6FnvLA/view?usp=drive_link 
+for steps to prepare the config files and run the application
