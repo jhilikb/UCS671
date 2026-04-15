@@ -24,7 +24,7 @@ source configure.sh
 
 #Replace jetbot/docker/base/Dockerfile with the contents in base_Dockerfile
 #Replace jetbot/setup.py with the contents of setup.py
-#Replace line jetbot/docker/model/Dockerfile line ARG BASE_IMAGE=jetbot-base:jp44 with the actual name of the base image
+#Replace line jetbot/docker/model/Dockerfile line ARG BASE_IMAGE=jetbot-base:jp44 with the actual name of the base image ex. jetbot/jetbot:base-$JETBOT_VERSION-$L4T_VERSION
 #Replace line jetbot/docker/display/Dockerfile line ARG BASE_IMAGE=jetbot-base:jp44 with the actual name of the base image
 #Replace line jetbot/docker/jupyter/Dockerfile line ARG BASE_IMAGE=jetbot-models:jp44 with the actual name of the model image
 #Replace line jetbot/docker/camera/Dockerfile line ARG BASE_IMAGE=jetbot-base:jp44 with the actual name of the base image
