@@ -15,8 +15,8 @@ jetbot/jetbot     display....
 jetbot/jetbot     jupyter....
 jetbot/jetbot     base....
 
-If you do not see the above images, follow the UCS671/jetbot_install_files
-/Instructions document to set the dockers before continuing with the commanda below.
+If you do not see the above images, follow the UCS671/jetbot_install_files/Instructions document to set the dockers
+before continuing with the commands below.
 
 
 sudo systemctl enable docker   # enable docker daemon at boot  (make sure you are inside docker folder of the git repo. i.e. jetbot)
@@ -28,6 +28,6 @@ https://<jetbot_ip>:8888
 Follow the notebooks basic_motion, collision_avoidance.
 Hold your kits while running the commands, otherwise it will fall off the desk.
 
-Incase you see driver related errors in your notebook you need to reinstall everything. Follow UCS671/jetbot_install_files
-/Instructions.
+Incase you see driver related errors in your notebook you need to reinstall everything. 
+Follow UCS671/jetbot_install_files/Instructions.
 
