@@ -21,7 +21,7 @@ If you do not see the above images, follow the jetbot_installation document to s
 sudo systemctl enable docker   # enable docker daemon at boot  (make sure you are inside docker folder of the git repo. i.e. jetbot)
 ./enable.sh $HOME   # we'll use home directory as working directory, set this as you please.
 
-#on your laptop browser to connect to the jetbot,jetbot_ip can be seen using ifconfig
+#on your laptop browser to connect to the jetbot,jetbot_ip can be seen using ifconfig, password is jetbot
 https://<jetbot_ip>:8888 
 
 Follow the notebooks basic_motion, collision_avoidance.
