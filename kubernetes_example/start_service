@@ -1,3 +1,9 @@
 kubectl apply -f test_k3s.yaml  #your_pod
 kubectl apply -f torch-service.yaml  #your_service
 kubectl get svc torch-service
+
+#the above should be run on the server
+
+
+curl http://<server_IP>:30080  #from_your_client/laptop for running the pod without kubectl
+
