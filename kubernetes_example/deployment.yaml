@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: torch-deployment
 spec:
-  replicas: 1
+  replicas: 1  #kubectl scale deployment torch-deployment --replicas=4   (you can use this after applying the deployment alternatively)
+
   selector:
     matchLabels:
       app: torch
