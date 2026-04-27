@@ -27,10 +27,11 @@ kubectl get nodes
 
 
 5. Setting up agent nodes
-curl -sfL https://get.k3s.io | K3S_URL=https://<SERVER_NODE_IP>:6443 K3S_TOKEN=<NODE_TOKEN> sh -
+curl -sfL https://get.k3s.io | K3S_URL=https://<SERVER_IP>:6443 K3S_TOKEN=<NODE_TOKEN> sh -
 
-5a. if you cannot find the token or sha while running step4 on your master,use the following on master  to regenerate it then execute step 5 on workers again.
-kubeadm token create --print-join-command
+#You can get <node_token> by running the following
+sudo cat /var/lib/rancher/k3s/server/node-token
+
 
 
 6. setting up a client who will use your nodes
