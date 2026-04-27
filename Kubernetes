@@ -1,0 +1,204 @@
+Pod: The basic unit for running a containerized app.
+
+Deployment: Manages and scales pods for you.
+
+Service: Exposes pods to the network.
+
+1. Install basic packages on all jetsons
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install -y curl apt-transport-https ca-certificates software-properties-common
+
+2. disable swap on all jetsons
+
+sudo swapoff -a
+sudo sed -i '/swap/d' /etc/fstab
+
+3. Kubernetes component install on all jetsons
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+sudo apt-get update
+sudo apt-get install -y kubeadm kubelet kubectl
+sudo apt-mark hold kubeadm kubelet kubectl
+
+4. setup the master
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+5. join the master (token is shown in the master in step 4)
+sudo kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+
+5a. if you cannot find the token or sha while running step4 on your master,use the following on master  to regenerate it then execute step 5 on workers again.
+kubeadm token create --print-join-command
+
+
+6. check on master
+
+kubectl get nodes
+kubectl get pods --all-namespaces
+
+7. creating a pod
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: torch
+spec:
+  containers:
+  - name: torchtest
+    image: nvcr.io/nvidia/l4t-pytorch:r32.7.1-pth1.10-py3
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+
+8. running the pod
+kubectl apply -f test_k3s.yaml
+
+9. connecting to the pod
+kubectl exec -it torch -- python3
+
+10.deleting a pod
+kubectl delete pod torch
+
+Advantages of Kubernetes
+a. Automatically scales your applications up or down based on usage.
+b.Spreads traffic evenly across pods to ensure reliability and performance
+c.Automatically restarts failed containers.
+d.Reschedules pods if a node goes down.
+e.Replaces unresponsive containers or ones failing health checks
+f. Deploy new versions of apps with zero downtime.
+g.Roll back automatically if something breaks.
+h.You define your desired state (via YAML/JSON), and Kubernetes maintains it
+i.Pods run in isolated environments (namespaces).
+j.Network policies control traffic between pods.
+k.Secrets and config maps manage sensitive data securely
+l. portability: an be run on any device
+m.Massive community and tools support
+
+example 1: how to use scale ups
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: nvidia.io.xxxx  # Replace with your image
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        ports:
+        - containerPort: 80
+
+
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app-deployment
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+
+kubectl apply -f deployment.yaml
+kubectl apply -f hpa.yaml
+
+kubectl get hpa
+kubectl describe hpa my-app-hpa
+
+example 2: how to use services
+
+
+# train_model is your training code, registered with your app.py. 
+#all your code and app.py has to be a part of your container (copy in your Dockerfile,will be automatically build in your container) 
+
+# app.py
+from fastapi import FastAPI
+from train import train_model
+
+app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"status": "API running"}
+
+@app.post("/train")
+def trigger_training():
+    result = train_model()
+    return {"message": result}
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pytorch-train-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pytorch-train
+  template:
+    metadata:
+      labels:
+        app: pytorch-train
+    spec:
+      containers:
+      - name: pytorch
+        image: yourname/pytorch-train-api
+        ports:
+        - containerPort: 5000
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pytorch-train-service
+spec:
+  selector:
+    app: pytorch-train
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+  type: NodePort
+
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+
+kubectl get svc pytorch-train-service
+curl -X POST http://<node-ip>:<node-port>/train
+
+or
+
+curl -X POST http://<node-ip>:<node-port>/train \
+  -H "Content-Type: application/json" \
+  -d '{"epochs": 10, "batch_size": 32, "learning_rate": 0.001}'
